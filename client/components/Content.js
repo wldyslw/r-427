@@ -4,7 +4,8 @@ import {
     Row
 } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import Main from './Main'
+import Main from './Main';
+import Docs from './Docs';
 
 class Content extends React.Component {
     constructor(props) {
@@ -15,9 +16,9 @@ class Content extends React.Component {
     switchContent(currentPage) {
         switch(currentPage) {
             //case 'MAIN': return <Main />
-            case 'DOCS': return 'DOCS';
-            case 'TESTS': return 'TESTS';
-            case 'ABOUT': return 'ABOUT';
+            case 'DOCS': return <Docs />;
+            case 'TESTS': return 'Тестирование';
+            case 'ABOUT': return 'О программе';
             default: return <Main />
         }
     }
