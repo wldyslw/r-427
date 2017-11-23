@@ -61,7 +61,7 @@ class Main extends React.Component {
                     <Media.Left>
                         <div onMouseMove={this.mouseMove} >
                             <ImageMapper                                 
-                                src='/img/ppu.jpg' width={750} map={map} 
+                                src='img/ppu.jpg' width={750} map={map} 
                                 onMouseEnter={(e) => this.setState({ tooltipVisible: true, tooltipText: e.description })}
                                 onMouseLeave={() => this.setState({ tooltipVisible: false })}
                             />
@@ -86,31 +86,31 @@ class Main extends React.Component {
                 <PageHeader>Галерея</PageHeader>
                 <Carousel>
                     <Carousel.Item>
-                        <img alt="800x600" src="/img/g1.jpg" />
+                        <img alt="800x600" src="img/g1.jpg" />
                     </Carousel.Item>
                     <Carousel.Item>
-                        <img alt="800x600" src="/img/g2.jpg" />
+                        <img alt="800x600" src="img/g2.jpg" />
                     </Carousel.Item>
                     <Carousel.Item>
-                        <img alt="800x800" src="/img/g3.jpg" />
+                        <img alt="800x800" src="img/g3.jpg" />
                     </Carousel.Item>
                     <Carousel.Item>
-                        <img alt="800x800" src="/img/g4.jpg" />
+                        <img alt="800x800" src="img/g4.jpg" />
                     </Carousel.Item>
                     <Carousel.Item>
-                        <img alt="800x800" src="/img/g5.jpg" />
+                        <img alt="800x800" src="img/g5.jpg" />
                     </Carousel.Item>
                     <Carousel.Item>
-                        <img alt="800x800" src="/img/g6.jpg" />
+                        <img alt="800x800" src="img/g6.jpg" />
                     </Carousel.Item>
                     <Carousel.Item>
-                        <img alt="800x800" src="/img/g7.jpg" />
+                        <img alt="800x800" src="img/g7.jpg" />
                     </Carousel.Item>
                     <Carousel.Item>
-                        <img alt="800x800" src="/img/g8.jpg" />
+                        <img alt="800x800" src="img/g8.jpg" />
                     </Carousel.Item>
                     <Carousel.Item>
-                        <img alt="800x800" src="/img/g9.jpg" />
+                        <img alt="800x800" src="img/g9.jpg" />
                     </Carousel.Item>
                 </Carousel>
             </div>
