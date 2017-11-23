@@ -3,18 +3,39 @@ import {
     Grid,
     Row
 } from 'react-bootstrap'
+import { connect } from 'react-redux'
 import Main from './Main'
 
 class Content extends React.Component {
+    constructor(props) {
+        super(props);
+        this.switchContent = this.switchContent.bind(this);
+    }
+
+    switchContent(currentPage) {
+        switch(currentPage) {
+            //case 'MAIN': return <Main />
+            case 'DOCS': return 'DOCS';
+            case 'TESTS': return 'TESTS';
+            case 'ABOUT': return 'ABOUT';
+            default: return <Main />
+        }
+    }
+
     render() {
+        console.log('Current page: ', this.props.currentPage);
         return (
             <Grid>
                 <Row>
-                    <Main />
+                    {this.switchContent(this.props.currentPage)}
                 </Row>
             </Grid>
         );
     }
 }
 
-export default Content;
+export default connect(
+    state => ({
+        currentPage: state.currentPage
+    })
+)(Content);

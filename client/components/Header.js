@@ -10,11 +10,17 @@ import {
     Media,
     Grid
 } from 'react-bootstrap'
+import {connect} from 'react-redux'
+import { navigate } from '../actions'
 import '../assets/bsuir.png';
 import '../assets/mf.png';
 import '../assets/logo.png'
 
 class Header extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
             <div>
@@ -37,14 +43,14 @@ class Header extends React.Component {
                 <Navbar inverse>
                     <Navbar.Header>
                         <Navbar.Brand>
-                            <a href='#'>Радиорелейная станция Р-427</a>
+                            <a href='#' onClick={() => this.props.navigate('MAIN')}>Радиорелейная станция Р-427</a>
                         </Navbar.Brand>
                     </Navbar.Header>
                     <Nav>
-                        <NavItem eventKey={1} href="#">Теория</NavItem>
-                        <NavItem eventKey={2} href="#">Практика</NavItem>
-                        <NavItem eventKey={2} href="#">Контроль знаний</NavItem>
-                        <NavItem eventKey={2} href="#">О программе</NavItem>
+                        <NavItem eventKey={1} onClick={() => this.props.navigate('DOCS')}>Теория</NavItem>
+                        <NavItem eventKey={2} onClick={() => console.log(this.props.currentPage)}>Практика</NavItem>
+                        <NavItem eventKey={2} onClick={() => this.props.navigate('TESTS')}>Контроль знаний</NavItem>
+                        <NavItem eventKey={2} onClick={() => this.props.navigate('ABOUT')}>О программе</NavItem>
                     </Nav>
                 </Navbar>
             </div>
@@ -52,4 +58,14 @@ class Header extends React.Component {
     }
 }
 
-export default Header;
+export default connect(
+    state => ({
+        currentPage: state.currentPage
+    }),
+    dispatch => ({
+        navigate(pageName) {
+            dispatch(navigate(pageName))
+            // console.log('Navigated to ', pageName)
+        }
+    })
+)(Header);

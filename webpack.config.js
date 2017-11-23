@@ -57,7 +57,7 @@ module.exports = {
         // }),
         new HtmlWebpackPlugin({
             inject: false,
-            title: 'АГМ-30Е',
+            title: 'Р-427',
             // favicon: './client/assets/images/icon.ico',
             template: './client/templates/template.ejs',
             appMountId: 'root'
