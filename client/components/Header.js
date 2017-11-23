@@ -47,10 +47,10 @@ class Header extends React.Component {
                         </Navbar.Brand>
                     </Navbar.Header>
                     <Nav>
-                        <NavItem eventKey={1} onClick={() => this.props.navigate('DOCS')}>Теория</NavItem>
-                        <NavItem eventKey={2} onClick={() => console.log(this.props.currentPage)}>Практика</NavItem>
-                        <NavItem eventKey={2} onClick={() => this.props.navigate('TESTS')}>Контроль знаний</NavItem>
-                        <NavItem eventKey={2} onClick={() => this.props.navigate('ABOUT')}>О программе</NavItem>
+                        <NavItem active={this.props.currentPage == 'DOCS'} eventKey={1} onClick={() => this.props.navigate('DOCS')}>Теория</NavItem>
+                        <NavItem active={this.props.currentPage == 'PRACTISE'} eventKey={2}>Практика</NavItem>
+                        <NavItem active={this.props.currentPage == 'TESTS'} eventKey={2} onClick={() => this.props.navigate('TESTS')}>Контроль знаний</NavItem>
+                        <NavItem active={this.props.currentPage == 'ABOUT'} eventKey={2} onClick={() => this.props.navigate('ABOUT')}>О программе</NavItem>
                     </Nav>
                 </Navbar>
             </div>

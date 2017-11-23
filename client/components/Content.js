@@ -23,7 +23,6 @@ class Content extends React.Component {
     }
 
     render() {
-        console.log('Current page: ', this.props.currentPage);
         return (
             <Grid>
                 <Row>
