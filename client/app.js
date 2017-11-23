@@ -2,8 +2,9 @@ import React from 'react'
 import { render } from 'react-dom'
 import './style'
 import 'typeface-roboto'
+import App from './components/App'
 
 render(
-    'Test',
+    <App />,
     document.getElementById('root')
 )

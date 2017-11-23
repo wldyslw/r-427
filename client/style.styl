@@ -1,22 +1,31 @@
-@font-face {
-  font-family: 'Material Icons';
-  font-style: normal;
-  font-weight: 400;
-  src: url(./assets/MaterialIcons-Regular.ttf) format('ttf');
+@import url('../node_modules/bootstrap/dist/css/bootstrap.min.css');
+
+body
+    background-color: #f0f0f0
+
+.navbar {
+    border-radius: 0 !important;
+    border: none !important;
 }
 
-.material-icons {
-  font-family: 'Material Icons';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 24px;
-  line-height: 1;
-  letter-spacing: normal;
-  text-transform: none;
-  display: inline-block;
-  white-space: nowrap;
-  word-wrap: normal;
-  direction: ltr;
-  -webkit-font-feature-settings: 'liga';
-  -webkit-font-smoothing: antialiased;
+.navbar-brand 
+    font-weight: bold;
+    color: #fff !important
+
+.pre-header {
+    background-color: #222;
+    padding-top: 20px;
+    color: #9d9d9d !important;
+}
+
+.carousel {
+    margin-bottom: 100vh;
+    .item {
+        height: 80vh !important;
+        overflow: hidden;
+        img {
+            min-width: 100% !important;
+            min-height: 100% !important;
+        }
+    } 
 }
