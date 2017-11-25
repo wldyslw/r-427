@@ -47,10 +47,14 @@ class Header extends React.Component {
                         </Navbar.Brand>
                     </Navbar.Header>
                     <Nav>
-                        <NavItem active={this.props.currentPage == 'DOCS'} eventKey={1} onClick={() => this.props.navigate('DOCS')}>Теория</NavItem>
-                        <NavItem active={this.props.currentPage == 'PRACTISE'} eventKey={2}>Практика</NavItem>
-                        <NavItem active={this.props.currentPage == 'TESTS'} eventKey={2} onClick={() => this.props.navigate('TESTS')}>Контроль знаний</NavItem>
-                        <NavItem active={this.props.currentPage == 'ABOUT'} eventKey={2} onClick={() => this.props.navigate('ABOUT')}>О программе</NavItem>
+                        <NavItem active={this.props.currentPage.pageName == 'DOCS'} eventKey={1} onClick={() => this.props.navigate('DOCS')}>Теория</NavItem>
+                        <NavItem active={this.props.currentPage.pageName == 'PRACTISE'} eventKey={2}>Практика</NavItem>
+                        <NavDropdown active={this.props.currentPage.pageName == 'TESTS'} eventKey={3} title="Тестирование" id="basic-nav-dropdown">
+                            <MenuItem onClick={() => this.props.navigate('TESTS', 0)} eventKey={3.1}>Тест по теории</MenuItem>
+                            <MenuItem onClick={() => this.props.navigate('TESTS', 1)} eventKey={3.2}>Тест по настройке оборудования</MenuItem>
+                            <MenuItem onClick={() => this.props.navigate('TESTS', 2)} eventKey={3.3}>Комплексный тест</MenuItem>
+                        </NavDropdown>
+                        <NavItem active={this.props.currentPage.pageName == 'ABOUT'} eventKey={4} onClick={() => this.props.navigate('ABOUT')}>О программе</NavItem>
                     </Nav>
                 </Navbar>
             </div>
@@ -63,8 +67,8 @@ export default connect(
         currentPage: state.currentPage
     }),
     dispatch => ({
-        navigate(pageName) {
-            dispatch(navigate(pageName))
+        navigate(pageName, subPageName, anchor) {
+            dispatch(navigate(pageName, subPageName, anchor))
             // console.log('Navigated to ', pageName)
         }
     })

@@ -1,11 +1,14 @@
 import { combineReducers } from 'redux';
-import answerMap from './answerMap'
+import { userStatus, answerStatus, pages } from './constants'
+import { answerMap } from './questions'
 
-const pages = {
-    MAIN: 'MAIN',
-    DOCS: 'DOCS',
-    TESTS: 'TESTS',
-    ABOUT: 'ABOUT'
+const defaultUserState = { 
+    name: null, 
+    group: null, 
+    status: userStatus.LOGGED_OUT,
+    variant: null,
+    elapsedTime: 0,
+    result: []
 }
 
 const currentPage = (state = { pageName: pages.MAIN, subPageName: null }, action) => ({
@@ -17,38 +20,28 @@ const currentPage = (state = { pageName: pages.MAIN, subPageName: null }, action
     }
 }[action.type] || (() => state))();
 
-const userStatus = {
-    LOGGED_OUT: 'LOGGED_OUT',
-    LOGGED_IN: 'LOGGED_IN',
-    WORKING: 'WORKING'
-}
-
-const answerStatus = {
-    TRUE: 'TRUE',
-    FALSE: 'FALSE',
-    NONE: 'NONE'
-}
-
-const currentUser = (
-    state = { 
-        name: null, 
-        group: null, 
-        status: userStatus.LOGGED_OUT,
-        variant: null,
-        elapsedTime: 0,
-        result: []
-    }, 
-    action
-) => ({
-    LOGIN() { return Object.assign({}, { name: action.name, group: action.group }) },
-    INCREMENT_TIME() { return Object.assign({}, state, { elapsedTime: state.elapsedTime + 1 }) },
+const currentUser = (state = defaultUserState, action) => ({
+    LOGIN() { 
+        return Object.assign(
+            {}, 
+            state,
+            { name: action.name, group: action.group, variant: action.variant, status: userStatus.WORKING, elapsedTime: 0 }
+        );
+    },
+    NAVIGATE() {
+        return defaultUserState;
+    },
+    SET_TIME() { return Object.assign({}, state, { elapsedTime: action.value }) },
     VALIDATE_ANSWERS() {
         const result = answerMap[action.testID][state.variant].map((e,i) => {
-            if(action.answers[i] == 0) return answerStatus.NONE;
+            if(action.answers[i] == null) return answerStatus.NONE;
             return e == action.answers[i] ? answerStatus.TRUE : answerStatus.FALSE;
         });
-        return Object.assign({}, state, { result });
+        return Object.assign({}, state, { result, status: userStatus.FINISHED });
+    },
+    RETRY() {
+        return Object.assign({}, state, { elapsedTime: 0, result: [], status: userStatus.WORKING })
     }
 }[action.type] || (() => state))();
 
-export default combineReducers({ currentPage });
+export default combineReducers({ currentPage, currentUser });

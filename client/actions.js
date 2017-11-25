@@ -5,13 +5,31 @@ export const navigate = (pageName, subPageName = null, anchor = null) => ({
     anchor
 });
 
+export const login = (name, group, variant) => ({
+    type: 'LOGIN',
+    name,
+    group,
+    variant
+});
+
+export const logout = () => ({
+    type: 'LOGOUT'
+});
+
+export const retry = () => ({
+    type: 'RETRY'
+});
+
 export const validateAnswers = (testID, answers) => ({
     type: 'VALIDATE_ANSWERS',
     testID,
     answers
 });
 
-export const incrementTime = () => { type: 'INCREMENT_TIME' }
+export const setTime = (value) => ({ 
+    type: 'SET_TIME',
+    value
+})
 
 const loadScore = () => {
     try {
@@ -23,6 +41,8 @@ const loadScore = () => {
         return undefined;
     }
 }
+
+export const loadResults = loadScore;
 
 const saveScore = (userScore) => {
     try {

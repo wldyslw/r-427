@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import {
     Carousel,
     PageHeader,
@@ -118,4 +119,11 @@ class Main extends React.Component {
     }
 }
 
-export default Main;
+export default connect(
+    state => state,
+    dispatch => ({
+        navigate(pageName, subPageName, anchor) {
+            dispatch(navigate(pageName, subPageName, anchor))
+        }
+    })
+)(Main);
