@@ -55,8 +55,8 @@ const saveScore = (userScore) => {
     }
 }
 
-export const saveResults = (currentUser, elapsedTime) => dispatch => {
-    const userScore = [Object.assign({}, currentUser, { elapsedTime }), ...loadScore()]
+export const saveResults = (currentUser, elapsedTime, testID) => dispatch => {
+    const userScore = [Object.assign({}, currentUser, { elapsedTime, testID }), ...loadScore()]
     saveScore(userScore);
     return userScore;
 }
