@@ -242,6 +242,9 @@ export default connect(
         navigateToMain() {
             dispatch(navigate('MAIN'));
         },
+        navigate(pageName, subPageName, anchor) {
+            dispatch(navigate(pageName, subPageName, anchor))
+        },
         retry() {
             dispatch(retry())
         }
