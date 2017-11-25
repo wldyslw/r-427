@@ -201,7 +201,7 @@ class Tests extends React.Component {
                 <ButtonToolbar>
                     <Button
                     bsStyle='primary'
-                    onClick={this.props.saveResults(this.props.currentUser)}>
+                    onClick={() => this.props.saveResults(this.props.currentUser, this.state.elapsedTime)}>
                         Сохранить результат
                     </Button>
                     <Button  
@@ -236,8 +236,8 @@ export default connect(
         setTime(value) {
             dispatch(setTime(value));
         },
-        saveResults(currentUser) {
-            dispatch(saveResults(currentUser))
+        saveResults(currentUser, elapsedTime) {
+            dispatch(saveResults(currentUser, elapsedTime))
         },
         navigateToMain() {
             dispatch(navigate('MAIN'));

@@ -31,7 +31,7 @@ export const setTime = (value) => ({
     value
 })
 
-const loadScore = () => {
+export const loadScore = () => {
     try {
         const serializedScore = localStorage.getItem('userScore');
         if(serializedScore === null) return [];
@@ -42,7 +42,9 @@ const loadScore = () => {
     }
 }
 
-export const loadResults = loadScore;
+export const loadResults = () => ({
+    type: 'LOAD_RESULTS'
+});
 
 const saveScore = (userScore) => {
     try {
@@ -53,8 +55,8 @@ const saveScore = (userScore) => {
     }
 }
 
-export const saveResults = currentUser => dispatch => {
-    const userScore = [...loadScore(), currentUser]
+export const saveResults = (currentUser, elapsedTime) => dispatch => {
+    const userScore = [Object.assign({}, currentUser, { elapsedTime }), ...loadScore()]
     saveScore(userScore);
     return userScore;
 }

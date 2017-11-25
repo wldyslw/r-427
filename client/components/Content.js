@@ -6,7 +6,8 @@ import {
 import { connect } from 'react-redux'
 import Main from './Main';
 import Docs from './Docs';
-import Tests from './Tests'
+import Tests from './Tests';
+import Results from './Results'
 import { questions } from '../questions'
 
 class Content extends React.Component {
@@ -18,6 +19,7 @@ class Content extends React.Component {
     switchContent(currentPage) {
         switch(currentPage.pageName) {
             //case 'MAIN': return <Main />
+            case 'RESULTS': return <Results />;
             case 'DOCS': return <Docs />;
             case 'TESTS': return <Tests testID={currentPage.subPageName} questions={questions} />;
             case 'ABOUT': return 'О программе';

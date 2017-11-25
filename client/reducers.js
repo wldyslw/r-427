@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { userStatus, answerStatus, pages } from './constants'
 import { answerMap } from './questions'
+import { loadScore } from './actions'
 
 const defaultUserState = { 
     name: null, 
@@ -41,6 +42,10 @@ const currentUser = (state = defaultUserState, action) => ({
     },
     RETRY() {
         return Object.assign({}, state, { elapsedTime: 0, result: [], status: userStatus.WORKING })
+    },
+    LOAD_RESULTS() {
+        const results = loadScore();
+        return Object.assign({}, state, { result: results })
     }
 }[action.type] || (() => state))();
 

@@ -14,5 +14,6 @@ export const pages = {
     MAIN: 'MAIN',
     DOCS: 'DOCS',
     TESTS: 'TESTS',
-    ABOUT: 'ABOUT'
+    ABOUT: 'ABOUT',
+    RESULTS: 'RESULTS'
 }

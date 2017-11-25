@@ -5,7 +5,8 @@ import {
     Carousel,
     PageHeader,
     Media,
-    Tooltip
+    Tooltip,
+    Modal
 } from 'react-bootstrap'
 import ImageMapper from '../ImageMapper'
 import '../assets/example.jpg'
@@ -19,12 +20,16 @@ import '../assets/g6.jpg';
 import '../assets/g7.jpg';
 import '../assets/g8.jpg';
 import '../assets/g9.jpg';
+import '../assets/g10.jpg';
+import '../assets/g11.jpg';
+import '../assets/g12.jpg';
 
 class Main extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {mX: 0, mY: 0, tooltipVisible: false, tooltipText: 'text'};
+        this.state = {mX: 0, mY: 0, tooltipVisible: false, tooltipText: 'text', modalOpen: false, activeIndex: 0};
         this.mouseMove = this.mouseMove.bind(this);
+        this.toggleModal = this.toggleModal.bind(this);
     }
 
     mouseMove(e) {
@@ -34,25 +39,32 @@ class Main extends React.Component {
         });
     }
 
+    toggleModal(i) {
+        this.setState({
+            modalOpen: !this.state.modalOpen,
+            activeIndex: i
+        });
+    }
+
     render() { 
         const map = {
             name: "my-map",
             areas: [
-                { shape: "rect", coords: [31,75,73,127], description: 'Тумблер включения питания' },
-                { shape: "rect", coords: [72,126,116,152], description: 'Порт для подключения электропитания' },
-                { shape: "rect", coords: [126,105,148,152], description: 'Индикаторы световой сигнализации' },
-                { shape: "rect", coords: [146,49,184,85], description: 'Кнопка вызова корреспондента' },
-                { shape: "rect", coords: [151,96,178,152], description: 'Порт служебной связи для подключения микротелеф. гарнитуры' },
-                { shape: "rect", coords: [200,100,258,121], description: 'Псследовательный порт управления RS-232' },
-                { shape: "rect", coords: [192,123,262,152], description: 'Порт внешней сигнализации' },
-                { shape: "rect", coords: [264,101,323,152], description: 'Порты Ethernet 10/100/1000 Base-T' },
-                { shape: "rect", coords: [325,101,384,152], description: 'Порты Е1' },
-                { shape: "rect", coords: [385,122,418,152], description: 'Порт для подключения резервного ППУ' },
-                { shape: "rect", coords: [419,142,435,152], description: 'Переключатель режимов резервирования' },
-                { shape: "rect", coords: [436,130,479,145], description: 'Порт измерения напряжения входного сигнала' },
-                { shape: "rect", coords: [429,102,487,125], description: 'Резервный порт управления' },
-                { shape: "rect", coords: [603,115,629,142], description: 'Винт подключения заземления' },
-                { shape: "rect", coords: [653,108,701,156], description: 'Порт СВЧ для подключения кабеля снижения' }
+                { shape: "rect", coords: [29,86,63,118], description: 'Тумблер включения питания' },
+                { shape: "rect", coords: [68,119,112,144], description: 'Порт для подключения электропитания' },
+                { shape: "rect", coords: [125,101,143,144], description: 'Индикаторы световой сигнализации' },
+                { shape: "rect", coords: [145,43,175,80], description: 'Кнопка вызова корреспондента' },
+                { shape: "rect", coords: [149,92,171,144], description: 'Порт служебной связи для подключения микротелеф. гарнитуры' },
+                { shape: "rect", coords: [193,91,256,115], description: 'Псследовательный порт управления RS-232' },
+                { shape: "rect", coords: [187,118,259,144], description: 'Порт внешней сигнализации' },
+                { shape: "rect", coords: [262,93,322,144], description: 'Порты Ethernet 10/100/1000 Base-T' },
+                { shape: "rect", coords: [326,93,385,144], description: 'Порты Е1' },
+                { shape: "rect", coords: [389,117,421,142], description: 'Порт для подключения резервного ППУ' },
+                { shape: "rect", coords: [422,133,440,144], description: 'Переключатель режимов резервирования' },
+                { shape: "rect", coords: [440,120,489,135], description: 'Порт измерения напряжения входного сигнала' },
+                { shape: "rect", coords: [433,90,494,115], description: 'Резервный порт управления' },
+                { shape: "rect", coords: [611,101,641,132], description: 'Винт подключения заземления' },
+                { shape: "rect", coords: [668,98,714,144], description: 'Порт СВЧ для подключения кабеля снижения' }
             ]
         }
         return (
@@ -86,34 +98,22 @@ class Main extends React.Component {
                 </Media>
                 <PageHeader>Галерея</PageHeader>
                 <Carousel>
-                    <Carousel.Item>
-                        <img alt="800x600" src="img/g1.jpg" />
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img alt="800x600" src="img/g2.jpg" />
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img alt="800x800" src="img/g3.jpg" />
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img alt="800x800" src="img/g4.jpg" />
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img alt="800x800" src="img/g5.jpg" />
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img alt="800x800" src="img/g6.jpg" />
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img alt="800x800" src="img/g7.jpg" />
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img alt="800x800" src="img/g8.jpg" />
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img alt="800x800" src="img/g9.jpg" />
-                    </Carousel.Item>
+                    {new Array(12).fill(0).map((e,i) => {
+                        return (
+                            <Carousel.Item key={i} onClick={() =>this.toggleModal(i)}>
+                                <img alt="800x600" src={`img/g${i + 1}.jpg`} />
+                            </Carousel.Item>
+                        );
+                    })}
                 </Carousel>
+                <Modal bsSize='lg' show={this.state.modalOpen} onHide={this.toggleModal}>
+                    <Modal.Header closeButton>
+                        <Modal.Title id="contained-modal-title-lg">Просмотр изображения</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <img className='modal-img' src={`img/g${this.state.activeIndex + 1}.jpg`} />
+                    </Modal.Body>
+                </Modal>
             </div>
         ); 
     }

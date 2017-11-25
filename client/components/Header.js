@@ -53,6 +53,7 @@ class Header extends React.Component {
                             <MenuItem onClick={() => this.props.navigate('TESTS', 0)} eventKey={3.1}>Тест по теории</MenuItem>
                             <MenuItem onClick={() => this.props.navigate('TESTS', 1)} eventKey={3.2}>Тест по настройке оборудования</MenuItem>
                             <MenuItem onClick={() => this.props.navigate('TESTS', 2)} eventKey={3.3}>Комплексный тест</MenuItem>
+                            <MenuItem onClick={() => this.props.navigate('RESULTS')} eventKey={3.4}>Архив результатов</MenuItem>
                         </NavDropdown>
                         <NavItem active={this.props.currentPage.pageName == 'ABOUT'} eventKey={4} onClick={() => this.props.navigate('ABOUT')}>О программе</NavItem>
                     </Nav>
