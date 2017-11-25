@@ -1,10 +1,13 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import {
     Nav,
     NavItem
 } from 'react-bootstrap'
 import * as docs from '../docs'
 import '../assets/example.jpg'
+
+require('smoothscroll-polyfill').polyfill();
 
 const categoryNames = ['Технические характеристики', 'Применяемые кабели', 'Варианты применения', 'Состав изделия', 'Устройство', 'Требования безопасности']
 
@@ -21,8 +24,15 @@ class Docs extends React.Component {
         });
     }
 
+    componentDidMount() {
+        if(this.props.currentPage.anchor != undefined) {
+            document.getElementById(this.props.currentPage.anchor).scrollIntoView({ behavior: 'smooth' });
+            document.getElementById(this.props.currentPage.anchor).classList.add('anchor');
+        }
+    }
+
     showDocs(ID) {
-        return [docs.tp, docs.cables, docs.application, '', docs.structure, docs.safety][ID] || 'succ';
+        return [docs.tp, docs.cables, docs.application, docs.composition, docs.structure, docs.safety][ID] || 'succ';
     }
 
     render() { 
@@ -39,4 +49,6 @@ class Docs extends React.Component {
     }
 }
 
-export default Docs;
+export default connect(
+    state => state
+)(Docs);

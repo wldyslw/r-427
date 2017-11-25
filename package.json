@@ -39,6 +39,7 @@
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "sec-to-min": "^1.0.1",
+    "smoothscroll-polyfill": "^0.4.0",
     "style-loader": "^0.19.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
