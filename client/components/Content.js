@@ -20,7 +20,7 @@ class Content extends React.Component {
         switch(currentPage.pageName) {
             //case 'MAIN': return <Main />
             case 'RESULTS': return <Results />;
-            case 'DOCS': return <Docs />;
+            case 'DOCS': return <Docs subPageName={this.props.currentPage.subPageName} anchor={this.props.currentPage.anchor} />;
             case 'TESTS': return <Tests testID={currentPage.subPageName} questions={questions} />;
             case 'ABOUT': return 'О программе';
             default: return <Main />

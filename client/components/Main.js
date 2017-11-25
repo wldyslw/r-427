@@ -8,6 +8,7 @@ import {
     Tooltip,
     Modal
 } from 'react-bootstrap'
+import { navigate } from '../actions'
 import ImageMapper from '../ImageMapper'
 import '../assets/example.jpg'
 import '../assets/ppu.jpg';
@@ -77,6 +78,7 @@ class Main extends React.Component {
                                 src='img/ppu.jpg' width={750} map={map} 
                                 onMouseEnter={(e) => this.setState({ tooltipVisible: true, tooltipText: e.description })}
                                 onMouseLeave={() => this.setState({ tooltipVisible: false })}
+                                onClick={() => this.props.navigate('DOCS', 4)}
                             />
                             <Tooltip 
                                 className='img-mapper-tooltip' 
