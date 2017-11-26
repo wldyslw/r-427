@@ -12,6 +12,7 @@ import {
 } from 'react-bootstrap'
 import {connect} from 'react-redux'
 import { navigate } from '../actions'
+import { docsCategoryNames } from '../constants'
 import '../assets/bsuir.png';
 import '../assets/mf.png';
 import '../assets/logo.png'
@@ -47,9 +48,16 @@ class Header extends React.Component {
                         </Navbar.Brand>
                     </Navbar.Header>
                     <Nav>
-                        <NavItem active={this.props.currentPage.pageName == 'DOCS'} eventKey={1} onClick={() => this.props.navigate('DOCS')}>Теория</NavItem>
-                        <NavItem active={this.props.currentPage.pageName == 'PRACTISE'} eventKey={2}>Практика</NavItem>
-                        <NavDropdown active={this.props.currentPage.pageName == 'TESTS'} eventKey={3} title="Тестирование" id="basic-nav-dropdown">
+                        <NavDropdown active={this.props.currentPage.pageName == 'DOCS'} eventKey={1} title="Теория" id="basic-nav-dropdown">
+                            {docsCategoryNames.map((e,i) => {
+                                return <MenuItem key={i} onClick={() => this.props.navigate('DOCS', i)} eventKey={1 + (i + 1) / 10}>{e}</MenuItem>
+                            })}
+                        </NavDropdown>
+                        <NavDropdown eventKey={3} title="Практика" id="basic-nav-dropdown">
+                            <MenuItem eventKey={2.1}>Порядок работы</MenuItem>
+                            <MenuItem eventKey={2.2}>Скачать программу</MenuItem>
+                        </NavDropdown>
+                        <NavDropdown active={this.props.currentPage.pageName == 'TESTS'} eventKey={3} title="Контроль знаний" id="basic-nav-dropdown">
                             <MenuItem onClick={() => this.props.navigate('TESTS', 0)} eventKey={3.1}>Тест по теории</MenuItem>
                             <MenuItem onClick={() => this.props.navigate('TESTS', 1)} eventKey={3.2}>Тест по настройке оборудования</MenuItem>
                             <MenuItem onClick={() => this.props.navigate('TESTS', 2)} eventKey={3.3}>Комплексный тест</MenuItem>
