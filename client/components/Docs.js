@@ -5,11 +5,10 @@ import {
     NavItem
 } from 'react-bootstrap'
 import * as docs from '../docs'
-import '../assets/example.jpg'
+import { docsCategoryNames as categoryNames } from '../constants';
 
 require('smoothscroll-polyfill').polyfill();
 
-const categoryNames = ['Технические характеристики', 'Применяемые кабели', 'Варианты применения', 'Состав изделия', 'Устройство', 'Требования безопасности']
 
 class Docs extends React.Component {
     constructor(props) {

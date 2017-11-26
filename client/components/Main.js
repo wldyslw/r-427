@@ -6,7 +6,8 @@ import {
     PageHeader,
     Media,
     Tooltip,
-    Modal
+    Modal,
+    Grid
 } from 'react-bootstrap'
 import { navigate } from '../actions'
 import ImageMapper from '../ImageMapper'
@@ -51,59 +52,58 @@ class Main extends React.Component {
         const map = {
             name: "my-map",
             areas: [
-                { shape: "rect", coords: [29,86,63,118], description: 'Тумблер включения питания', anchor: 10 },
-                { shape: "rect", coords: [68,119,112,144], description: 'Порт для подключения электропитания', anchor: 8 },
-                { shape: "rect", coords: [125,101,143,144], description: 'Индикаторы световой сигнализации', anchor: 14 },
-                { shape: "rect", coords: [145,43,175,80], description: 'Кнопка вызова корреспондента', anchor: 11 },
-                { shape: "rect", coords: [149,92,171,144], description: 'Порт служебной связи для подключения микротелеф. гарнитуры', anchor: 6 },
-                { shape: "rect", coords: [193,91,256,115], description: 'Псследовательный порт управления RS-232', anchor: 3 },
-                { shape: "rect", coords: [187,118,259,144], description: 'Порт внешней сигнализации', anchor: 4 },
-                { shape: "rect", coords: [262,93,322,144], description: 'Порты Ethernet 10/100/1000 Base-T', anchor: 1 },
-                { shape: "rect", coords: [326,93,385,144], description: 'Порты Е1', anchor: 2 },
-                { shape: "rect", coords: [389,117,421,142], description: 'Порт для подключения резервного ППУ', anchor: 5 },
-                { shape: "rect", coords: [422,133,440,144], description: 'Переключатель режимов резервирования', anchor: 12 },
-                { shape: "rect", coords: [440,120,489,135], description: 'Порт измерения напряжения входного сигнала', anchor: 7 },
-                { shape: "rect", coords: [433,90,494,115], description: 'Резервный порт управления' },
-                { shape: "rect", coords: [611,101,641,132], description: 'Винт подключения заземления', anchor: 13 },
-                { shape: "rect", coords: [668,98,714,144], description: 'Порт СВЧ для подключения кабеля снижения', anchor: 9 }
+                { shape: "rect", coords: [52,141,100,184], description: 'Тумблер включения питания', anchor: 10 },
+                { shape: "rect", coords: [111,194,175,233], description: 'Порт для подключения электропитания', anchor: 8 },
+                { shape: "rect", coords: [202,157,227,225], description: 'Индикаторы световой сигнализации', anchor: 14 },
+                { shape: "rect", coords: [229,69,283,120], description: 'Кнопка вызова корреспондента', anchor: 11 },
+                { shape: "rect", coords: [236,152,278,221], description: 'Порт служебной связи для подключения микротелеф. гарнитуры', anchor: 6 },
+                { shape: "rect", coords: [309,149,408,185], description: 'Псследовательный порт управления RS-232', anchor: 3 },
+                { shape: "rect", coords: [299,187,415,231], description: 'Порт внешней сигнализации', anchor: 4 },
+                { shape: "rect", coords: [418,150,518,231], description: 'Порты Ethernet 10/100/1000 Base-T', anchor: 1 },
+                { shape: "rect", coords: [519,148,617,230], description: 'Порты Е1', anchor: 2 },
+                { shape: "rect", coords: [622,184,675,228], description: 'Порт для подключения резервного ППУ', anchor: 5 },
+                { shape: "rect", coords: [677,214,703,228], description: 'Переключатель режимов резервирования', anchor: 12 },
+                { shape: "rect", coords: [702,190,784,221], description: 'Порт измерения напряжения входного сигнала', anchor: 7 },
+                { shape: "rect", coords: [690,148,793,185], description: 'Резервный порт управления' },
+                { shape: "rect", coords: [977,164,1031,213], description: 'Винт подключения заземления', anchor: 13 },
+                { shape: "rect", coords: [1064,154,1143,231], description: 'Порт СВЧ для подключения кабеля снижения', anchor: 9 }
             ]
         }
         return (
             <div>
                 <PageHeader>Основная информация</PageHeader>
-                <Media>
-                    <Media.Left>
-                        <div onMouseMove={this.mouseMove} >
-                            <ImageMapper                                 
-                                src='img/ppu.jpg' width={750} map={map} 
-                                onMouseEnter={(e) => this.setState({ tooltipVisible: true, tooltipText: e.description })}
-                                onMouseLeave={() => this.setState({ tooltipVisible: false })}
-                                onClick={(e) => this.props.navigate('DOCS', 4, e.anchor)}
-                            />
-                            <Tooltip 
-                                className='img-mapper-tooltip' 
-                                style={{ display: this.state.tooltipVisible ? 'block' : 'none', top: this.state.mY, left: this.state.mX + 20 }} 
-                                placement="right" className="in" id="tooltip-right"
-                            >
-                                {this.state.tooltipText}
-                            </Tooltip>
-                        </div>
-                        {/* <img width={750} alt='PPU' src='/img/ppu.jpg' /> */}
-                    </Media.Left>
-                    <Media.Body>
-                        <Media.Heading>РАДИОРЕЛЕЙНАЯ СТАНЦИЯ</Media.Heading>
-                        предназначена для организации радиорелейных 
-                        линий (сетей) связи, обеспечения привязки полевых узлов связи к 
-                        узлам связи стационарной и опорной сети связи Вооруженных Сил, 
-                        а также к сети электросвязи общего пользования.
-                    </Media.Body>
-                </Media>
+                <div onMouseMove={this.mouseMove} >
+                    <h4>
+                        <strong>РАДИОРЕЛЕЙНАЯ СТАНЦИЯ</strong> предназначена для 
+                        организации радиорелейных линий (сетей) связи, обеспечения 
+                        привязки полевых узлов связи к узлам связи стационарной и 
+                        опорной сети связи Вооруженных Сил, а также к сети электросвязи 
+                        общего пользования.
+                    </h4>
+                    <hr />
+                    <ImageMapper                                 
+                        src='img/ppu.jpg' map={map}
+                        width={1200}
+                        onMouseEnter={(e) => this.setState({ tooltipVisible: true, tooltipText: e.description })}
+                        onMouseLeave={() => this.setState({ tooltipVisible: false })}
+                        onClick={(e) => this.props.navigate('DOCS', 4, e.anchor)}
+                    />
+                    <Tooltip 
+                        className='img-mapper-tooltip' 
+                        style={{ display: this.state.tooltipVisible ? 'block' : 'none', top: this.state.mY, left: this.state.mX + 20 }} 
+                        placement="right" className="in" id="tooltip-right"
+                    >
+                        {this.state.tooltipText}
+                    </Tooltip>
+                </div>
                 <PageHeader>Галерея</PageHeader>
                 <Carousel>
                     {new Array(12).fill(0).map((e,i) => {
                         return (
                             <Carousel.Item key={i} onClick={() =>this.toggleModal(i)}>
-                                <img alt="800x600" src={`img/g${i + 1}.jpg`} />
+                                <div className='flex'>
+                                    <img alt="800x600" src={`img/g${i + 1}.jpg`} />
+                                </div>
                             </Carousel.Item>
                         );
                     })}
