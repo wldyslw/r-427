@@ -111,7 +111,7 @@ class Tests extends React.Component {
                     type="text"
                     name='name'
                     value={this.state.name}
-                    placeholder="Введите имя"
+                    placeholder="Введите имя и фамилию"
                     onChange={this.handleChange}
                     />
                 </FormGroup>
@@ -197,11 +197,11 @@ class Tests extends React.Component {
                         })}
                     </tbody>
                 </Table>
-                <h3>Набрано баллов: {Math.round(this.props.currentUser.result.filter(e => e == 'TRUE').length / this.props.currentUser.result.length * 10)}</h3>
+                <h3>Ваша отметка: {Math.round(this.props.currentUser.result.filter(e => e == 'TRUE').length / this.props.currentUser.result.length * 10)}</h3>
                 <ButtonToolbar>
                     <Button
                     bsStyle='primary'
-                    onClick={() => this.props.saveResults(this.props.currentUser, this.state.elapsedTime, this.props.testID)}>
+                    onClick={() => this.props.saveResults(this.props.currentUser, this.state.elapsedTime, this.props.testID, new Date())}>
                         Сохранить результат
                     </Button>
                     <Button  
@@ -236,8 +236,8 @@ export default connect(
         setTime(value) {
             dispatch(setTime(value));
         },
-        saveResults(currentUser, elapsedTime, testID) {
-            dispatch(saveResults(currentUser, elapsedTime, testID))
+        saveResults(currentUser, elapsedTime, testID, date) {
+            dispatch(saveResults(currentUser, elapsedTime, testID, date))
         },
         navigateToMain() {
             dispatch(navigate('MAIN'));

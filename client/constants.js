@@ -17,3 +17,5 @@ export const pages = {
     ABOUT: 'ABOUT',
     RESULTS: 'RESULTS'
 }
+
+export const docsCategoryNames = ['Технические характеристики', 'Применяемые кабели', 'Варианты применения', 'Состав изделия', 'Устройство', 'Требования безопасности']

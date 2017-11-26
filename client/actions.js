@@ -55,8 +55,17 @@ const saveScore = (userScore) => {
     }
 }
 
-export const saveResults = (currentUser, elapsedTime, testID) => dispatch => {
-    const userScore = [Object.assign({}, currentUser, { elapsedTime, testID }), ...loadScore()]
+export const saveResults = (currentUser, elapsedTime, testID, date) => dispatch => {
+    const userScore = [Object.assign({}, currentUser, { elapsedTime, testID, date }), ...loadScore()]
     saveScore(userScore);
+    console.log(userScore);
     return userScore;
+}
+
+export const clearResults = () => dispatch => {
+    try {
+        localStorage.setItem('userScore', JSON.stringify([]));
+    } catch(err) {
+        console.log('An error occurred while saving score to localstorage: ', err);
+    }
 }

@@ -3,10 +3,14 @@ import { connect } from 'react-redux'
 import {
     Table,
     PageHeader,
-    Modal
+    Modal,
+    ButtonToolbar,
+    Button,
+    FormControl,
+    FormGroup
 } from 'react-bootstrap'
 import secToMin from 'sec-to-min'
-import { loadResults } from '../actions'
+import { loadResults, clearResults } from '../actions'
 import { questions } from '../questions'
 
 const answerAllies = { TRUE: 'Верно', FALSE: 'Неверно', NONE: 'Нет ответа' }
@@ -14,8 +18,12 @@ const answerAllies = { TRUE: 'Верно', FALSE: 'Неверно', NONE: 'Не�
 class Results extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { modalOpen: false, selectedUser: this.props.currentUser.result[0] }
+        this.state = {pass: '', validation: null, modalOpen: false, clearOpen: false, selectedUser: this.props.currentUser.result[0] }
         this.toggleModal = this.toggleModal.bind(this);
+        this.toggleClear = this.toggleClear.bind(this);
+        this.checkPass = this.checkPass.bind(this);
+        this.handlePass = this.handlePass.bind(this);
+        this.validationState = this.validationState.bind(this);
     }
 
     componentWillMount() {
@@ -28,6 +36,32 @@ class Results extends React.Component {
             modalOpen: !this.state.modalOpen,
             selectedUser
         })
+    }
+
+    toggleClear() {
+        this.setState({
+            clearOpen: !this.state.clearOpen
+        })
+    }
+
+    validationState() {
+        return this.state.validation
+    }
+
+    handlePass(e) {
+        this.setState({
+            pass: e.target.value
+        });
+    }
+
+    checkPass() {
+        if(this.state.pass !== 'r427') this.setState({validation: 'error'})
+        else {
+            this.props.clearResults();
+            this.props.loadResults();
+            this.toggleClear();
+            this.setState({validation: null})
+        }
     }
 
     renderModal() {
@@ -70,11 +104,12 @@ class Results extends React.Component {
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Фамилия</th>
+                            <th>Имя</th>
                             <th>Группа</th>
                             <th>Вариант</th>
-                            <th>Время</th>
+                            <th>Затраченное время</th>
                             <th>Отметка</th>
+                            <th>Дата выполнения</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -87,11 +122,43 @@ class Results extends React.Component {
                                     <td>{e.variant + 1}</td>
                                     <td>{secToMin(e.elapsedTime.toFixed())}</td>
                                     <td>{Math.round(e.result.filter(el => el == 'TRUE').length / e.result.length * 10)}</td>
+                                    <td>{e.date ? `${new Date(e.date).getDate()}.${new Date(e.date).getMonth()}.${new Date(e.date).getFullYear()}` : ''}</td>
                                 </tr>
                             );
                         })}
                     </tbody>
                 </Table>
+                <ButtonToolbar>
+                    <Button 
+                    bsStyle='primary' 
+                    onClick={this.toggleClear}>
+                        Очистить результаты
+                    </Button>
+                </ButtonToolbar>
+                <Modal show={this.state.clearOpen} onHide={this.toggleClear}>
+                    <Modal.Header closeButton>
+                        <Modal.Title id="contained-modal-title-lg">Очистка результатов</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <FormGroup validationState={this.validationState()} controlId="name">
+                            <FormControl
+                            type="password"
+                            name='pass'
+                            placeholder="Введите пароль для очистки"
+                            onChange={this.handlePass}
+                            />
+                            
+                            <FormControl.Feedback />
+                        </FormGroup>
+                        <ButtonToolbar>
+                            <Button 
+                            bsStyle='primary' 
+                            onClick={this.checkPass}>
+                                Очистить результаты
+                            </Button>
+                        </ButtonToolbar>
+                    </Modal.Body>
+                </Modal>
                 {this.state.selectedUser ? this.renderModal() : ''}
             </div>
         ); 
@@ -103,6 +170,9 @@ export default connect(
     dispatch => ({
         loadResults() {
             dispatch(loadResults())
+        },
+        clearResults() {
+            dispatch(clearResults())
         }
     })
 )(Results);
