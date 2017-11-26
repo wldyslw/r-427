@@ -11,7 +11,6 @@ import {
 } from 'react-bootstrap'
 import { navigate } from '../actions'
 import ImageMapper from '../ImageMapper'
-import '../assets/example.jpg'
 import '../assets/ppu.jpg';
 import '../assets/g1.jpg';
 import '../assets/g2.jpg';
