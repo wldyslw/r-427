@@ -25,6 +25,7 @@ class Tests extends React.Component {
             group: '',
             variant: null
         };
+        this.maxTime = this.props.testID ? 420 : 480;
         this.validateInput = this.validateInput.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleAnswers = this.handleAnswers.bind(this);
@@ -82,7 +83,7 @@ class Tests extends React.Component {
     tick(startTime) {
         return () => {
             const elapsedTime = Math.floor((new Date() - startTime) / 1000)
-            if(elapsedTime.toFixed() <= 900) this.setState({
+            if(elapsedTime.toFixed() <= this.maxTime) this.setState({
                 elapsedTime
             });
             else this.endTest();
@@ -126,8 +127,9 @@ class Tests extends React.Component {
                 </FormGroup>
                 <ButtonToolbar>
                     <ToggleButtonGroup onChange={this.handleChange} type="radio" name="variant" defaultValue={null}>
-                        <ToggleButton value={0}>Вариант 1</ToggleButton>
-                        <ToggleButton value={1}>Вариант 2</ToggleButton>
+                        {this.props.questions[this.props.testID].map((e,i) => {
+                            return <ToggleButton key={i} value={i}>{`Вариант ${i + 1}`}</ToggleButton>
+                        })}
                     </ToggleButtonGroup>
                 </ButtonToolbar>
                 <hr />
@@ -143,10 +145,10 @@ class Tests extends React.Component {
         );
         else if(this.props.currentUser.status == userStatus.WORKING) return (
             <div>
-                <PageHeader>{testNames[this.props.testID] + ' '}<small>Времени прошло: {secToMin(this.state.elapsedTime.toFixed())}</small></PageHeader>
+                <PageHeader>{testNames[this.props.testID] + ' '}<small>Времени осталось: {secToMin(this.maxTime - this.state.elapsedTime.toFixed())}</small></PageHeader>
                 {this.props.questions[this.props.testID][this.props.currentUser.variant].map((el,i) => {
                     return (
-                        <Panel key={i} header={<h3>{el.q}</h3>}>
+                        <Panel key={i} header={<h3>{`${i + 1}. ${el.q}`}</h3>}>
                             <ButtonToolbar>
                                 <ToggleButtonGroup vertical onChange={this.handleAnswers} type="radio" name={`q-${i}`} defaultValue={null}>
                                     {el.a.map((e,j) => {
