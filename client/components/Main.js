@@ -22,8 +22,6 @@ import '../assets/g7.jpg';
 import '../assets/g8.jpg';
 import '../assets/g9.jpg';
 import '../assets/g10.jpg';
-import '../assets/g11.jpg';
-import '../assets/g12.jpg';
 
 class Main extends React.Component {
     constructor(props) {
@@ -68,6 +66,18 @@ class Main extends React.Component {
                 { shape: "rect", coords: [1064,154,1143,231], description: 'Порт СВЧ для подключения кабеля снижения', anchor: 9 }
             ]
         }
+        const photoCaptions = [
+            'Антенна \"волновой канал\" в обтекателе на мачте',
+            'Антенна \"волновой канал\" в обтекателе',
+            'Антенна \"волновой канал\" в обтекателе на кунге Р-409Б1',
+            'Антенна параболическая решетчатого типа',
+            'Вариант организации связи с использованием Р-427 из состава Р-409МБ1 (КАС)',
+            'Внешний вид интерфейсов ППУ',
+            'Внешний вид ППУ Р-427',
+            'Интерфейсы для управления и подключения потоков Е1',
+            'ППУ Р-427 в стативе',
+            'Служебная связь и индикация'
+        ];
         return (
             <div>
                 <PageHeader>Основная информация</PageHeader>
@@ -96,8 +106,8 @@ class Main extends React.Component {
                     </Tooltip>
                 </div>
                 <PageHeader>Галерея</PageHeader>
-                <Carousel>
-                    {new Array(12).fill(0).map((e,i) => {
+                <Carousel slide={this.state.modalOpen} className='carousel-main'>
+                    {new Array(10).fill(0).map((e,i) => {
                         return (
                             <Carousel.Item key={i} onClick={() =>this.toggleModal(i)}>
                                 <div className='flex'>
@@ -107,12 +117,23 @@ class Main extends React.Component {
                         );
                     })}
                 </Carousel>
-                <Modal bsSize='lg' show={this.state.modalOpen} onHide={this.toggleModal}>
+                <Modal bsSize='lg' show={this.state.modalOpen} onHide={() => this.toggleModal(0)}>
                     <Modal.Header closeButton>
-                        <Modal.Title id="contained-modal-title-lg">Просмотр изображения</Modal.Title>
+                        <Modal.Title id="contained-modal-title-lg">{photoCaptions[this.state.activeIndex]}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <img className='modal-img' src={`img/g${this.state.activeIndex + 1}.jpg`} />
+                        <Carousel indicators={false} onSelect={() => this.setState({activeIndex: this.state.activeIndex < 9 ? this.state.activeIndex + 1 : 0})} activeIndex={this.state.activeIndex} slide={false} className='carousel-secondary'>
+                            {new Array(10).fill(0).map((e,i) => {
+                                return (
+                                    <Carousel.Item className='text-center' key={i}>
+                                        <div className='flex'>
+                                            <img alt="800x600" src={`img/g${i + 1}.jpg`} />
+                                        </div>
+                                    </Carousel.Item>
+                                );
+                            })}
+                        </Carousel>
+                        {/* <img className='modal-img' src={`img/g${this.state.activeIndex + 1}.jpg`} /> */}
                     </Modal.Body>
                 </Modal>
             </div>
