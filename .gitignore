@@ -62,5 +62,5 @@ typings/
 /public/style
 /public/bundle.js
 /public/index.html
-.zip
+*.zip
 
