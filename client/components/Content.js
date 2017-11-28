@@ -8,6 +8,8 @@ import Main from './Main';
 import Docs from './Docs';
 import Tests from './Tests';
 import Results from './Results'
+import About from './About';
+import FAQ from './FAQ'
 import { questions } from '../questions'
 
 class Content extends React.Component {
@@ -20,9 +22,10 @@ class Content extends React.Component {
         switch(currentPage.pageName) {
             //case 'MAIN': return <Main />
             case 'RESULTS': return <Results />;
-            case 'DOCS': return <Docs subPageName={this.props.currentPage.subPageName} anchor={this.props.currentPage.anchor} />;
+            case 'DOCS': return <Docs subPageName={currentPage.subPageName} anchor={currentPage.anchor} />;
             case 'TESTS': return <Tests testID={currentPage.subPageName} questions={questions} />;
-            case 'ABOUT': return 'О программе';
+            case 'ABOUT': return <About />;
+            case 'FAQ': return <FAQ />
             default: return <Main />
         }
     }

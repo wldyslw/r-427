@@ -31,7 +31,7 @@ class Docs extends React.Component {
     }
 
     showDocs(ID) {
-        return [docs.tp, docs.cables, docs.application, docs.composition, docs.structure, docs.safety][ID] || 'succ';
+        return [docs.tp, docs.cables, docs.application, docs.composition, <docs.structure />, docs.safety][ID] || 'succ';
     }
 
     render() { 
