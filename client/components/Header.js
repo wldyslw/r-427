@@ -52,15 +52,17 @@ class Header extends React.Component {
                             {docsCategoryNames.map((e,i) => {
                                 return <MenuItem key={i} onClick={() => this.props.navigate('DOCS', i)} eventKey={1 + (i + 1) / 10}>{e}</MenuItem>
                             })}
+                            <MenuItem target='_blank' href='r1.pdf'>Руководство по экспулатации</MenuItem>
+                            <MenuItem target='_blank' href='r2.pdf'>Руководство оператора РРС</MenuItem>
                         </NavDropdown>
-                        <NavDropdown eventKey={3} title="Практика" id="basic-nav-dropdown">
-                            <MenuItem eventKey={2.1}>Порядок работы</MenuItem>
+                        <NavDropdown active={this.props.currentPage.pageName == 'FAQ'} eventKey={3} title="Практика" id="basic-nav-dropdown">
+                            <MenuItem onClick={() => this.props.navigate('FAQ')} eventKey={2.1}>Порядок работы</MenuItem>
                             <MenuItem eventKey={2.2}>Скачать программу</MenuItem>
                         </NavDropdown>
                         <NavDropdown active={this.props.currentPage.pageName == 'TESTS'} eventKey={3} title="Контроль знаний" id="basic-nav-dropdown">
                             <MenuItem onClick={() => this.props.navigate('TESTS', 0)} eventKey={3.1}>Тест по теории</MenuItem>
                             <MenuItem onClick={() => this.props.navigate('TESTS', 1)} eventKey={3.2}>Тест по настройке оборудования</MenuItem>
-                            <MenuItem onClick={() => this.props.navigate('TESTS', 2)} eventKey={3.3}>Комплексный тест</MenuItem>
+                            {/* <MenuItem onClick={() => this.props.navigate('TESTS', 2)} eventKey={3.3}>Комплексный тест</MenuItem> */}
                             <MenuItem onClick={() => this.props.navigate('RESULTS')} eventKey={3.4}>Архив результатов</MenuItem>
                         </NavDropdown>
                         <NavItem active={this.props.currentPage.pageName == 'ABOUT'} eventKey={4} onClick={() => this.props.navigate('ABOUT')}>О программе</NavItem>

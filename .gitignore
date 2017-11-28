@@ -57,6 +57,10 @@ typings/
 # dotenv environment variables file
 .env
 
-/public
+/public/fonts
+/public/img
+/public/style
+/public/bundle.js
+/public/index.html
 .zip
 

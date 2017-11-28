@@ -15,7 +15,8 @@ export const pages = {
     DOCS: 'DOCS',
     TESTS: 'TESTS',
     ABOUT: 'ABOUT',
-    RESULTS: 'RESULTS'
+    RESULTS: 'RESULTS',
+    FAQ: 'FAQ'
 }
 
 export const docsCategoryNames = ['Технические характеристики', 'Применяемые кабели', 'Варианты применения', 'Состав изделия', 'Устройство', 'Требования безопасности']
