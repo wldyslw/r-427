@@ -25,7 +25,7 @@ class Tests extends React.Component {
             group: '',
             variant: null
         };
-        this.maxTime = this.props.testID ? 420 : 480;
+        this.maxTime = this.props.testID == 1 ? 420 : 480;
         this.validateInput = this.validateInput.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleAnswers = this.handleAnswers.bind(this);
@@ -34,6 +34,19 @@ class Tests extends React.Component {
         this.stopTimer = this.stopTimer.bind(this);
         this.startTest = this.startTest.bind(this);
         this.endTest = this.endTest.bind(this);
+    }
+
+    componentDidUpdate() {
+        if(this.props.currentUser.status == userStatus.LOGGED_OUT && this.state.elapsedTime != 0) {
+            this.stopTimer();
+            this.setState({
+                elapsedTime: 0,
+                answers: new Array(this.props.questions.length).fill(null),
+                name: '',
+                group: '',
+                variant: null
+            });
+        }
     }
 
     validateInput() {
@@ -111,7 +124,6 @@ class Tests extends React.Component {
                     <FormControl
                     type="text"
                     name='name'
-                    value={this.state.name}
                     placeholder="Введите имя и фамилию"
                     onChange={this.handleChange}
                     />
@@ -120,7 +132,6 @@ class Tests extends React.Component {
                     <FormControl
                     type="text"
                     name='group'
-                    value={this.state.group}
                     placeholder="Введите номер группы"
                     onChange={this.handleChange}
                     />

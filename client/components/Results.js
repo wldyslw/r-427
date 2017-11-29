@@ -97,6 +97,7 @@ class Results extends React.Component {
     }
 
     render() { 
+        const testNames = ['Тест по теории', 'Тест по настройке оборудования', 'Комплексный тест']
         return (
             <div>
                 <PageHeader>Архив результатов</PageHeader>
@@ -119,7 +120,7 @@ class Results extends React.Component {
                                     <td>{i + 1}</td>
                                     <td>{e.name}</td>
                                     <td>{e.group}</td>
-                                    <td>{e.variant + 1}</td>
+                                    <td>{`${testNames[e.testID]} - ${e.variant + 1}`}</td>
                                     <td>{secToMin(e.elapsedTime.toFixed())}</td>
                                     <td>{Math.round(e.result.filter(el => el == 'TRUE').length / e.result.length * 10)}</td>
                                     <td>{e.date ? `${new Date(e.date).getDate()}.${new Date(e.date).getMonth()}.${new Date(e.date).getFullYear()}` : ''}</td>
