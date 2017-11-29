@@ -63,4 +63,4 @@ typings/
 /public/bundle.js
 /public/index.html
 *.zip
-
+*.exe
