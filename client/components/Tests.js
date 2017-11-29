@@ -25,7 +25,7 @@ class Tests extends React.Component {
             group: '',
             variant: null
         };
-        this.maxTime = this.props.testID == 1 ? 420 : 480;
+        this.maxTime = 420;
         this.validateInput = this.validateInput.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleAnswers = this.handleAnswers.bind(this);
@@ -34,11 +34,6 @@ class Tests extends React.Component {
         this.stopTimer = this.stopTimer.bind(this);
         this.startTest = this.startTest.bind(this);
         this.endTest = this.endTest.bind(this);
-    }
-
-    componentWillReceiveProps() { 
-        this.maxTime = this.props.testID == 1 ? 420 : 480; 
-        console.log(this.maxTime);
     }
 
     componentDidUpdate() {

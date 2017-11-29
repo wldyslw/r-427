@@ -32,13 +32,13 @@ export const cables = (
     
         <p>В Р-427 используется три типа кабеля: кабель снижения, кабель питания и кабель LAN для управления станцией.</p>
 
-        <img className='cable' id='d6' src='img/d4.jpg' />
+        <img className='cable' id='d6' src='img/d6.jpg' />
         <p>Коаксиальный кабель снижения типа SCF12-50J имеет затухание 10,6 дБ на 100 м, внешний диаметр 13,8 мм и волновое сопротивление 50 Ом.</p>
 
-        <img className='cable' id='d4' src='img/d5.jpg' />
+        <img className='cable' id='d4' src='img/d4.jpg' />
         <p>Кабель питания имеет двухполюсный разъем типа 2ESDV-02.</p>
 
-        <img className='cable' id='d5' src='img/d6.jpg' />
+        <img className='cable' id='d5' src='img/d5.jpg' />
         <p>Кабель LAN, типа FTP-5, имеет обжатые с обоих концов разъемы RJ-45.</p>
     
         <p>Все перечисленные кабели входят в комплект поставки оборудования.</p>
