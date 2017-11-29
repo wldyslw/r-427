@@ -36,6 +36,11 @@ class Tests extends React.Component {
         this.endTest = this.endTest.bind(this);
     }
 
+    componentWillReceiveProps() { 
+        this.maxTime = this.props.testID == 1 ? 420 : 480; 
+        console.log(this.maxTime);
+    }
+
     componentDidUpdate() {
         if(this.props.currentUser.status == userStatus.LOGGED_OUT && this.state.elapsedTime != 0) {
             this.stopTimer();
