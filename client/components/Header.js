@@ -57,7 +57,7 @@ class Header extends React.Component {
                         </NavDropdown>
                         <NavDropdown active={this.props.currentPage.pageName == 'FAQ'} eventKey={3} title="Практика" id="basic-nav-dropdown">
                             <MenuItem onClick={() => this.props.navigate('FAQ')} eventKey={2.1}>Порядок работы</MenuItem>
-                            <MenuItem eventKey={2.2}>Скачать программу</MenuItem>
+                            <MenuItem href='RStation.exe'>Скачать программу</MenuItem>
                         </NavDropdown>
                         <NavDropdown active={this.props.currentPage.pageName == 'TESTS'} eventKey={3} title="Контроль знаний" id="basic-nav-dropdown">
                             <MenuItem onClick={() => this.props.navigate('TESTS', 0)} eventKey={3.1}>Тест по теории</MenuItem>
