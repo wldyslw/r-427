@@ -30,13 +30,16 @@ class Header extends React.Component {
                         <Row className="text-center">
                             <Media>
                                 <Media.Left>
-                                    <img width={128} height={64} style={{display:'inline'}} src="img/logo.png" alt="Image" />
+                                    <img width={80} height={80} style={{display:'inline'}} src="img/bsuir.png" alt="Image" />
                                 </Media.Left>
                                 <Media.Body>
                                 <p>Учреждение образования <br/>
                                 «Белорусский государственный университет информатики и радиоэлектроники» <br/>
                                 Военный факультет</p>
                                 </Media.Body>
+                                <Media.Right>
+                                    <img width={80} height={80} style={{display:'inline'}} src="img/mf.png" alt="Image" />
+                                </Media.Right>
                             </Media>
                         </Row>
                     </Grid>
