@@ -1,7 +1,7 @@
 {
-  "name": "agm-30e",
+  "name": "r-427",
   "version": "1.0.0",
-  "description": "AGM-30E simulator start page & docs",
+  "description": "RRS R-427 start page & docs",
   "scripts": {
     "start": "webpack-dev-server --progress --colors",
     "build": "webpack --progress --colors"
