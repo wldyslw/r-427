@@ -27,7 +27,7 @@ class Header extends React.Component {
             <div>
                 <div className='pre-header'>
                     <Grid>
-                        <Row>                      
+                        <Row className="text-center">
                             <Media>
                                 <Media.Left>
                                     <img width={128} height={64} style={{display:'inline'}} src="img/logo.png" alt="Image" />
@@ -35,7 +35,7 @@ class Header extends React.Component {
                                 <Media.Body>
                                 <p>Учреждение образования <br/>
                                 «Белорусский государственный университет информатики и радиоэлектроники» <br/>
-                                Военный факультет</p>  
+                                Военный факультет</p>
                                 </Media.Body>
                             </Media>
                         </Row>

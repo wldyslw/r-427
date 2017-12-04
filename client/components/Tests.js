@@ -23,7 +23,8 @@ class Tests extends React.Component {
             answers: new Array(this.props.questions.length).fill(null),
             name: '',
             group: '',
-            variant: null
+            variant: null,
+            question: null,
         };
         this.maxTime = 420;
         this.validateInput = this.validateInput.bind(this);
@@ -34,6 +35,9 @@ class Tests extends React.Component {
         this.stopTimer = this.stopTimer.bind(this);
         this.startTest = this.startTest.bind(this);
         this.endTest = this.endTest.bind(this);
+        this.nextQuestion = this.nextQuestion.bind(this);
+        this.handleSelect = this.handleSelect.bind(this);
+        this.validateSelect = this.validateSelect.bind(this);
     }
 
     componentDidUpdate() {
@@ -44,7 +48,9 @@ class Tests extends React.Component {
                 answers: new Array(this.props.questions.length).fill(null),
                 name: '',
                 group: '',
-                variant: null
+                variant: null,
+                question: null,
+                selectedQ: null,
             });
         }
     }
@@ -104,12 +110,30 @@ class Tests extends React.Component {
     }
 
     startTest() {
-        this.props.login(this.state.name, this.state.group, this.state.variant); 
+        this.setState({question: 0});
+        this.props.login(this.state.name, this.state.group, this.state.variant);
         this.startTimer();
+    }
+
+    nextQuestion() {
+        this.setState((prevState, props) =>
+        ({
+            question: prevState.question + 1,
+            selectedQ: null
+        }));
+    }
+
+    handleSelect(e) {
+        this.setState({selectedQ: e.target.value});
+    }
+
+    validateSelect() {
+        return this.state.selectedQ == null;
     }
 
     endTest() {
         this.stopTimer();
+        this.setState({selectedQ: null});
         this.props.setTime(this.state.elapsedTime);
         this.props.validateAnswers(this.props.testID, this.state.answers);
     }
@@ -154,31 +178,32 @@ class Tests extends React.Component {
                 </ButtonToolbar>
             </div>
         );
-        else if(this.props.currentUser.status == userStatus.WORKING) return (
+        else if(this.props.currentUser.status == userStatus.WORKING) {
+            let button = null;
+            console.log(this.state.selectedQ);
+            if (this.state.question + 1 === this.props.questions[this.props.testID][this.props.currentUser.variant].length) {
+                button = <Button bsStyle='success' onClick={this.endTest} disabled={this.validateSelect()}>Закончить тестирование</Button>
+            }
+            else {
+                button = <Button bsStyle='primary' onClick={this.nextQuestion} disabled={this.validateSelect()}>Следующий вопрос</Button>
+            }
+            return (
             <div>
                 <PageHeader>{testNames[this.props.testID] + ' '}<small>Времени осталось: {secToMin(this.maxTime - this.state.elapsedTime.toFixed())}</small></PageHeader>
-                {this.props.questions[this.props.testID][this.props.currentUser.variant].map((el,i) => {
-                    return (
-                        <Panel key={i} header={<h3>{`${i + 1}. ${el.q}`}</h3>}>
-                            <ButtonToolbar>
-                                <ToggleButtonGroup vertical onChange={this.handleAnswers} type="radio" name={`q-${i}`} defaultValue={null}>
-                                    {el.a.map((e,j) => {
-                                        return <ToggleButton key={j} value={`${i}-${j}`}>{e}</ToggleButton>
-                                    })}
-                                </ToggleButtonGroup>
-                            </ButtonToolbar>
-                        </Panel>
-                    );
-                })}
+                <Panel key={this.state.question} header={<h3>{`${this.state.question + 1}. ${this.props.questions[this.props.testID][this.props.currentUser.variant][this.state.question].q}`}</h3>}>
+                    <ButtonToolbar>
+                        <ToggleButtonGroup vertical onChange={this.handleAnswers} type="radio" name={`q-${this.state.question}`} defaultValue={null}>
+                            {this.props.questions[this.props.testID][this.props.currentUser.variant][this.state.question].a.map((e,j) => {
+                                return <ToggleButton key={j} value={`${this.state.question}-${j}`} onChange={this.handleSelect}>{e}</ToggleButton>
+                            })}
+                        </ToggleButtonGroup>
+                    </ButtonToolbar>
+                </Panel>
                 <ButtonToolbar>
-                    <Button 
-                    bsStyle='primary' 
-                    onClick={this.endTest}>
-                        Закончить тестирование
-                    </Button>
+                    {button}
                 </ButtonToolbar>
             </div>
-        );
+        )}
         else if(this.props.currentUser.status == userStatus.FINISHED) return (
             <div>
                 <PageHeader>
