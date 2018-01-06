@@ -1,6 +1,6 @@
 # RRS R-427 docs & tests
 
-**ATTENTION:** you should use latest version of one of popular browsers to work (e.g. Chrome is highly recomended).
+**ATTENTION:** you should use latest version of one of popular browsers to work (e.g. Chrome is highly recommended).
 
 ## Deploying frontend
 
